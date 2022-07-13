@@ -44,7 +44,7 @@ class Foods extends Component {
       );
 
     const { food } = this.state;
-    console.log(food);
+    // console.log(food);
 
     if (!food) return null;
 
@@ -58,7 +58,8 @@ class Foods extends Component {
       <section className='mainSection'>
         <header className='pageHeader'>
           <h2>Consumed Foods:</h2>
-          <Link to={'/create'}>
+
+          <Link to={'/add'}>
             <button type='button' className='btnSecondary'>
               Add Food
             </button>

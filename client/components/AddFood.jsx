@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 
+function withRouter(Component) {
+  function ComponentWithRouterProp(props) {
+    let location = useLocation();
+    let navigate = useNavigate();
+    let params = useParams();
+    return <Component {...props} router={{ location, navigate, params }} />;
+  }
+
+  return ComponentWithRouterProp;
+}
 // Custom hook for handling input boxes
 // saves us from creating onChange handlers for them individually
 const useInput = (init) => {
@@ -14,48 +24,38 @@ const useInput = (init) => {
 
 const AddFood = (props) => {
   const [item_name, nameOnChange] = useInput('');
+
   const saveFood = () => {
-    // check if name is empty
-    if (item_name === '') {
-      setNameError('required');
-      // check if height is not a number
-    }
     const body = {
       item_name,
     };
-    fetch('/api/character', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'Application/JSON',
-      },
-      body: JSON.stringify(body),
-    })
-      .then((resp) => resp.json())
+    fetch(
+      'https://api.nutritionix.com/v1_1/search/bacon?results=0:5&nf_protein==1&fields=item_name,nf_calories,nf_protein,nf_total_carbohydrate,nf_total_fat',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'Application/JSON',
+        },
+        body: JSON.stringify(body),
+      }
+    )
+      .then((resp) => {
+        console.log(resp);
+        resp.json();
+      })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
       })
-      .then(() => {
-        props.history.push('/');
-      })
-      .catch((err) =>
-        console.log('CreateCharacter fetch /api/character: ERROR: ', err)
-      );
+      //   .then(() => {
+      //     props.history.push('/');
+      //   })
+      .catch((err) => console.log('AddFood fetch: ERROR: ', err));
   };
 
-  // useEffect to clear nameError when `name` is changed
-  useEffect(() => {
-    setNameError(null);
-  }, [item_name]);
-
   return (
-    <section className='mainSection createCharContainer'>
+    <section className='mainSection createFoodContainer'>
       <header className='pageHeader'>
         <h2>Add Food</h2>
-        <Link to='/' className='backLink'>
-          <button type='button' className='btnSecondary'>
-            Back to Macros
-          </button>
-        </Link>
       </header>
 
       <article className='card createFood'>
@@ -64,11 +64,10 @@ const AddFood = (props) => {
           <label htmlFor='name'>Food Item: </label>
           <input
             name='Food'
-            placeholder='Enter your food item here.'
+            placeholder='Enter food'
             value={item_name}
             onChange={nameOnChange}
           />
-          {nameError ? <span className='errorMsg'>{nameError}</span> : null}
         </div>
         <div className='createCharButtonContainer'>
           <Link to='/' className='backLink'>
@@ -85,4 +84,4 @@ const AddFood = (props) => {
   );
 };
 
-export default AddFood;
+export default withRouter(AddFood);

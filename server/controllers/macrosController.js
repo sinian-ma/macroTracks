@@ -1,6 +1,6 @@
 const models = require('../models/macrosModels');
 
-// const starWarsController = {};
+const macrosController = {};
 
 // starWarsController.getCharacters = (req, res, next) => {
 //   // write code here
@@ -15,52 +15,38 @@ const models = require('../models/macrosModels');
 //     });
 // };
 
-// starWarsController.getSpecies = (req, res, next) => {
-//   // write code here
-//   const speciesId = req.query.id;
-//   models.Species.find({ _id: speciesId })
-//     .then((data) => {
-//       // console.log('Data from species.find: ', data);
-//       res.locals.species = data[0];
-//       next();
-//     })
-//     .catch((err) => {
-//       console.log('Star Wars Controller Error: ', err);
-//     });
-// };
+macrosController.addFood = (req, res, next) => {
+  // write code here
+  const {
+    item_name,
+    nf_calories,
+    nf_total_fat,
+    nf_total_carbohydrate,
+    nf_protein,
+    nf_serving_size_qty,
+    nf_serving_size_unit,
+  } = req.body;
+  models.Post.create({
+    item_name,
+    nf_calories,
+    nf_total_fat,
+    nf_total_carbohydrate,
+    nf_protein,
+    nf_serving_size_qty,
+    nf_serving_size_unit,
+  })
+    .then((foodDoc) => {
+      res.locals.food = foodDoc;
+      next();
+    })
+    .catch((err) => {
+      next({
+        log: `macrosController.addFood: Error: ${err}`,
+        message: {
+          err: 'Error occurred in macrosController.addFood. Check server log for more details',
+        },
+      });
+    });
+};
 
-// starWarsController.getHomeworld = (req, res, next) => {
-//   // write code here
-//   const homeworldId = req.query.id;
-//   models.Planet.find({ _id: homeworldId })
-//     .then((data) => {
-//       // console.log('Data from species.find: ', data);
-//       res.locals.planet = data[0];
-//       next();
-//     })
-//     .catch((err) => {
-//       console.log('Star Wars Controller Error: ', err);
-//     });
-// };
-
-// starWarsController.getFilm = (req, res, next) => {
-//   // write code here
-//   const filmId = req.query.id;
-//   models.Film.find({ _id: filmId })
-//     .then((data) => {
-//       // console.log('Data from species.find: ', data);
-//       res.locals.film = data[0];
-//       next();
-//     })
-//     .catch((err) => {
-//       console.log('Star Wars Controller Error: ', err);
-//     });
-// };
-
-// starWarsController.addCharacter = (req, res, next) => {
-//   // write code here
-
-//   next();
-// };
-
-// module.exports = starWarsController;
+module.exports = macrosController;
