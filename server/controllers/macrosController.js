@@ -2,18 +2,20 @@ const models = require('../models/macrosModels');
 
 const macrosController = {};
 
-// starWarsController.getCharacters = (req, res, next) => {
-//   // write code here
-//   models.People.find()
-//     .then((data) => {
-//       // console.log('Data from Person.find: ', data);
-//       res.locals.person = data;
-//       next();
-//     })
-//     .catch((err) => {
-//       console.log('Star Wars Controller Error: ', err);
-//     });
-// };
+macrosController.getFood = (req, res, next) => {
+  // write code here
+  console.log('macrosController console log');
+  models.Post.find()
+    .then((data) => {
+      // console.log('Data from Person.find: ', data);
+      console.log('macrosController console log');
+      res.locals.food = data;
+      next();
+    })
+    .catch((err) => {
+      console.log('macros controller error: ', err);
+    });
+};
 
 macrosController.addFood = (req, res, next) => {
   // write code here

@@ -9,9 +9,9 @@ function withRouter(Component) {
     let params = useParams();
     return <Component {...props} router={{ location, navigate, params }} />;
   }
-
   return ComponentWithRouterProp;
 }
+
 // Custom hook for handling input boxes
 // saves us from creating onChange handlers for them individually
 const useInput = (init) => {
@@ -23,8 +23,16 @@ const useInput = (init) => {
   return [value, onChange];
 };
 
+let newFood;
+
 const AddFood = (props) => {
   const [item_name, nameOnChange] = useInput('');
+  const [nf_calories, caloriesOnChange] = useInput('');
+  const [nf_total_fat, fatOnChange] = useInput('');
+  const [nf_total_carbohydrate, carbOnChange] = useInput('');
+  const [nf_protein, proteinOnChange] = useInput('');
+  const [nf_serving_size_qty, qtyOnChange] = useInput('');
+  const [nf_serving_size_unit, unitOnChange] = useInput('');
 
   //
   function getPosts() {
@@ -49,7 +57,8 @@ const AddFood = (props) => {
           nf_serving_size_qty,
           nf_serving_size_unit,
         } = response.data.hits[0].fields;
-        console.log(response.data.hits[0].fields);
+        let result = response.data.hits[0].fields;
+        console.log(result);
       })
       .catch(function (error) {
         console.error(error);
@@ -59,23 +68,25 @@ const AddFood = (props) => {
   //
 
   const saveFood = () => {
-    console.log(item_name);
     getPosts();
     const body = {
       item_name,
+      nf_calories,
+      nf_total_fat,
+      nf_total_carbohydrate,
+      nf_protein,
+      nf_serving_size_qty,
+      nf_serving_size_unit,
     };
-    fetch(
-      'https://api.nutritionix.com/v1_1/search/bacon?results=0:5&nf_protein==1&fields=item_name,nf_calories,nf_protein,nf_total_carbohydrate,nf_total_fat',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'Application/JSON',
-        },
-        body: JSON.stringify(body),
-      }
-    )
+    console.log('body: ', body);
+    fetch('/api', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'Application/JSON',
+      },
+      body: JSON.stringify(body),
+    })
       .then((resp) => {
-        // console.log(resp);
         resp.json();
       })
       .then((data) => {

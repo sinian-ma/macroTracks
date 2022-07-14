@@ -13,18 +13,11 @@ class Foods extends Component {
   }
 
   componentDidMount() {
-    fetch(
-      'https://api.nutritionix.com/v1_1/search/apple?results=0:5&nf_protein==1&fields=item_name,nf_calories,nf_protein,nf_total_carbohydrate,nf_total_fat'
-    )
+    fetch('/api')
       .then((res) => res.json())
       .then((food) => {
-        // console.log(food.hits);
-        if (!Array.isArray(food.hits)) food = [];
-        food = food.hits;
-        let arr = [];
-        food.forEach((obj) => arr.push(obj.fields));
-        food = arr;
-        // console.log(food);
+        if (!Array.isArray(food)) food = [];
+
         return this.setState({
           food,
           fetchedFood: true,
@@ -44,7 +37,6 @@ class Foods extends Component {
       );
 
     const { food } = this.state;
-    // console.log(food);
 
     if (!food) return null;
 

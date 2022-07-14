@@ -13,13 +13,13 @@ app.use(express.static(path.resolve(__dirname, '../client')));
 
 app.use('/api', apiRouter);
 
-app.use((req, res) =>
-  res.status(404).send("This is not the page you're looking for...")
-);
-
 app.get('/', (req, res) => {
   return res.status(200);
 });
+
+app.use((req, res) =>
+  res.status(404).send("This is not the page you're looking for...")
+);
 
 app.use((err, req, res, next) => {
   const defaultErr = {
@@ -45,3 +45,5 @@ if (process.env.NODE_ENV === 'production') {
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}...`);
 });
+
+module.exports = app;

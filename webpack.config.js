@@ -34,18 +34,18 @@ module.exports = {
       template: './index.html',
     }),
   ],
-  // devServer: {
-  //   host: 'localhost',
-  //   port: 8080,
-  //   // enable HMR on the devServer
-  //   hot: true,
-  //   // fallback to root for other urls
-  //   historyApiFallback: true,
-  //   proxy: {
-  //     '/api/leaders': {
-  //       target: 'http://localhost:3000',
-  //       secure: false,
-  //     },
-  //   },
-  // },
+  devServer: {
+    host: 'localhost',
+    port: 8080,
+    // enable HMR on the devServer
+    hot: true,
+    // fallback to root for other urls
+    historyApiFallback: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        secure: false,
+      },
+    },
+  },
 };
