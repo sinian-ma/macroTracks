@@ -40,15 +40,6 @@ const AddFood = (props) => {
     axios
       .request(options)
       .then(function (response) {
-        const {
-          item_name,
-          nf_calories,
-          nf_total_fat,
-          nf_total_carbohydrate,
-          nf_protein,
-          nf_serving_size_qty,
-          nf_serving_size_unit,
-        } = response.data.hits[0].fields;
         return response.data.hits[0].fields;
       })
       .then((obj) => {
@@ -60,6 +51,7 @@ const AddFood = (props) => {
           nf_protein,
           nf_serving_size_qty,
           nf_serving_size_unit,
+          // nf_serving_weight_grams,
         } = obj;
 
         const body = {
@@ -70,6 +62,7 @@ const AddFood = (props) => {
           nf_protein: nf_protein,
           nf_serving_size_qty: nf_serving_size_qty,
           nf_serving_size_unit: nf_serving_size_unit,
+          // nf_serving_weight_grams: nf_serving_weight_grams,
         };
 
         fetch('/api', {
@@ -89,40 +82,6 @@ const AddFood = (props) => {
         console.error(error);
       });
   }
-
-  //
-
-  const saveFood = () => {
-    findFood();
-
-    const body = {
-      item_name,
-      nf_calories,
-      nf_total_fat,
-      nf_total_carbohydrate,
-      nf_protein,
-      nf_serving_size_qty,
-      nf_serving_size_unit,
-    };
-    // console.log('body: ', body);
-    fetch('/api', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'Application/JSON',
-      },
-      body: JSON.stringify(body),
-    })
-      .then((resp) => {
-        resp.json();
-      })
-      .then((data) => {
-        // console.log(data);
-      })
-      // .then(() => {
-      //   props.history.push('/');
-      // })
-      .catch((err) => console.log('AddFood fetch: ERROR: ', err));
-  };
 
   return (
     <section className='mainSection createFoodContainer'>
@@ -147,7 +106,7 @@ const AddFood = (props) => {
               Go Back
             </button>
           </Link>
-          <button type='button' className='btnMain' onClick={saveFood}>
+          <button type='button' className='btnMain' onClick={findFood}>
             Save
           </button>
         </div>

@@ -39,12 +39,16 @@ const postSchema = new mongoose.Schema({
   },
   nf_serving_size_qty: {
     type: Number,
-    required: true,
+    // required: true,
   },
   nf_serving_size_unit: {
     type: String,
-    required: true,
+    // required: true,
   },
+  // nf_serving_weight_grams: {
+  //   type: String,
+  //   // required: true,
+  // },
 });
 
 const Post = mongoose.model('Post', postSchema);

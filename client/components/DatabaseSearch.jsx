@@ -49,11 +49,19 @@ class Foods extends Component {
     return (
       <section className='mainSection'>
         <header className='pageHeader'>
-          <Link to={'/add'}>
-            <button type='button' className='btnSecondary'>
-              Add Food
-            </button>
-          </Link>
+          <span>
+            <Link to={'/add'}>
+              <button type='button' className='btnSecondary'>
+                Add Food
+              </button>
+            </Link>
+            <Link to={'/delete'}>
+              <button type='button' className='btnSecondary'>
+                Delete Food
+              </button>
+            </Link>
+          </span>
+
           <h2>What I Ate:</h2>
         </header>
         <div className='foodContainer'>{foodElems}</div>
