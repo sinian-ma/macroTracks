@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from '../App.jsx';
-import CurrentNutrition from './CurrentNutrition.jsx';
 
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {

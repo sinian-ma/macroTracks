@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { UserContext } from '../App.jsx';
 
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {
@@ -23,6 +24,7 @@ const useInput = (init) => {
 };
 
 const DeleteFood = () => {
+  const user = useContext(UserContext);
   const [item_name, nameOnChange] = useInput('');
 
   function deleteFd() {
@@ -33,8 +35,20 @@ const DeleteFood = () => {
       },
       body: JSON.stringify({ item_name: item_name }),
     })
-      .then((resp) => {
-        console.log(resp);
+      .then((resp) => resp.json())
+      .then((data) => {
+        // console.log('data: ', data);
+        if ('deletedCount' in data) {
+          user.calories = 0;
+          user.protein = 0;
+          user.fat = 0;
+          user.carbohydrate = 0;
+        } else {
+          user.calories -= data.nf_calories;
+          user.protein -= data.nf_protein;
+          user.fat -= data.nf_total_fat;
+          user.carbohydrate -= data.nf_total_carbohydrate;
+        }
       })
       .catch((err) => console.log('AddFood fetch: ERROR: ', err));
 

@@ -6,7 +6,6 @@ macrosController.getFood = (req, res, next) => {
   // write code here
   models.Post.find()
     .then((data) => {
-      // console.log('Data from Person.find: ', data);
       res.locals.food = data;
       next();
     })
@@ -26,7 +25,7 @@ macrosController.deleteFood = (req, res, next) => {
         console.log('macros controller error: ', err);
       });
   } else {
-    models.Post.deleteOne({ item_name: req.body.item_name })
+    models.Post.findOneAndDelete({ item_name: req.body.item_name })
       .then((data) => {
         res.locals.food = data;
         next();

@@ -17,6 +17,7 @@ class Foods extends Component {
     fetch('/api')
       .then((res) => res.json())
       .then((food) => {
+        console.log(food);
         if (!Array.isArray(food)) food = [];
 
         return this.setState({
