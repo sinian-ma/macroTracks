@@ -38,25 +38,31 @@ const DatabaseSearch = () => {
 
   return (
     <section className='mainSection'>
-      <CurrentNutrition />
-      <header className='pageHeader'>
+      <div className='fixed-container'>
+        <CurrentNutrition />
+      </div>
+
+      <div className='pageHeader'>
         <span class='body-heading'>
-          <h2>Food Log:</h2>
-          <span>
-            <Link to={'/add'}>
-              <button type='button' className='green-btnSecondary'>
-                Add Food
-              </button>
-            </Link>
-            <Link to={'/delete'}>
-              <button type='button' className='red-btnSecondary'>
-                Delete Food
-              </button>
-            </Link>
-          </span>
+          <div className='aboveFoodCards'>
+            <h2>Food Log:</h2>
+            <span>
+              <Link to={'/add'}>
+                <button type='button' className='green-btnSecondary'>
+                  Add Food
+                </button>
+              </Link>
+              <Link to={'/delete'}>
+                <button type='button' className='red-btnSecondary'>
+                  Delete Food
+                </button>
+              </Link>
+            </span>
+          </div>
+
+          <div className='foodContainer'>{foodElems}</div>
         </span>
-      </header>
-      <div className='foodContainer'>{foodElems}</div>
+      </div>
     </section>
   );
 };

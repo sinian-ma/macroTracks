@@ -62,7 +62,7 @@ const DeleteFood = () => {
   }
 
   return (
-    <div>
+    <div className='editFoodPages'>
       <CurrentNutrition />
       <section className='editFoodContainer'>
         <article className='cardEditFood'>

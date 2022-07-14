@@ -50,11 +50,14 @@ main {
 
 .body-heading {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  padding: 0px 20px;
+  padding: 0px 40px;
   /* border-bottom: 2px green solid; */
   align-items: center;
   margin-bottom: 20px;
+  /* background-color: blue; */
+  width: 100%;
 }
 
 button {
@@ -88,6 +91,7 @@ button:active {
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
+  width: 100%;
 }
 
 .foodCard {
@@ -123,10 +127,12 @@ button:active {
 .nutrition-current {
   display: flex;
   flex-direction: column;
-  height: 10%;
   align-items: center;
-  justify-content: center;
-  /* border-bottom: 2px black solid; */
+  margin-left: 20px;
+  padding-left: 8px;
+  border: black 1px solid;
+  border-radius: 10px;
+  margin-top: 10px;
 }
 
 .macroCount {
@@ -134,4 +140,32 @@ button:active {
 }
 .typ-text {
   margin-right: 0px 10px;
+}
+
+.mainSection {
+  display: flex;
+  /* background-color: cadetblue; */
+}
+
+.fixed-container {
+  flex: 0.4;
+}
+
+.aboveFoodCards {
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+  /* background-color: red; */
+}
+
+.pageHeader {
+  flex: 1;
+}
+
+.editFoodPages {
+  display: flex;
+}
+
+.editFoodContainer {
+  /* background-color: red; */
 }

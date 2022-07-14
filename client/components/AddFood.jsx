@@ -100,9 +100,9 @@ const AddFood = (props) => {
   }
 
   return (
-    <div>
+    <div className='editFoodPages'>
       <CurrentNutrition />
-      <section className='editFoodContainer'>
+      <div className='editFoodContainer'>
         <article className='cardEditFood'>
           <h3>What did you eat?</h3>
           <div className='editFoodFields'>
@@ -126,7 +126,7 @@ const AddFood = (props) => {
             </button>
           </div>
         </article>
-      </section>
+      </div>
     </div>
   );
 };
