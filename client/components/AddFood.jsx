@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {
@@ -25,7 +26,41 @@ const useInput = (init) => {
 const AddFood = (props) => {
   const [item_name, nameOnChange] = useInput('');
 
+  //
+  function getPosts() {
+    const options = {
+      method: 'GET',
+      url: `https://nutritionix-api.p.rapidapi.com/v1_1/search/${item_name}?results=0:20&fields=item_name,nf_calories,nf_protein,nf_total_carbohydrate,nf_total_fat, nf_serving_weight_grams`,
+      headers: {
+        'X-RapidAPI-Key': '8d78c2c137msh45549c0419a5bcfp1908b7jsn3ad72d367882',
+        'X-RapidAPI-Host': 'nutritionix-api.p.rapidapi.com',
+      },
+    };
+
+    axios
+      .request(options)
+      .then(function (response) {
+        const {
+          item_name,
+          nf_calories,
+          nf_total_fat,
+          nf_total_carbohydrate,
+          nf_protein,
+          nf_serving_size_qty,
+          nf_serving_size_unit,
+        } = response.data.hits[0].fields;
+        console.log(response.data.hits[0].fields);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  }
+
+  //
+
   const saveFood = () => {
+    console.log(item_name);
+    getPosts();
     const body = {
       item_name,
     };
@@ -40,15 +75,15 @@ const AddFood = (props) => {
       }
     )
       .then((resp) => {
-        console.log(resp);
+        // console.log(resp);
         resp.json();
       })
       .then((data) => {
         // console.log(data);
       })
-      //   .then(() => {
-      //     props.history.push('/');
-      //   })
+      // .then(() => {
+      //   props.history.push('/');
+      // })
       .catch((err) => console.log('AddFood fetch: ERROR: ', err));
   };
 
