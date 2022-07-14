@@ -113,6 +113,7 @@ button:active {
 
 .typ-text,
 .typ-imp-text {
+  display: flex;
   margin: 5px 0px;
 }
 
@@ -124,19 +125,38 @@ button:active {
   margin: 20px 0px;
 }
 
-.nutrition-current {
+.nutrition-current,
+.nutrition-goal,
+.nutrition-remaining {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-left: 20px;
-  padding-left: 8px;
   border: black 1px solid;
   border-radius: 10px;
   margin-top: 10px;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.nutrition-current {
+  background-color: rgba(158, 158, 219, 0.366);
+}
+
+.nutrition-goal {
+  background-color: rgb(175, 222, 175);
+}
+
+.nutrition-remaining {
+  background-color: rgb(226, 175, 175);
 }
 
 .macroCount {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  /* padding-left: 40px; */
 }
 .typ-text {
   margin-right: 0px 10px;
@@ -164,8 +184,4 @@ button:active {
 
 .editFoodPages {
   display: flex;
-}
-
-.editFoodContainer {
-  /* background-color: red; */
 }

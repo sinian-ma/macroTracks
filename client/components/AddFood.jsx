@@ -3,6 +3,8 @@ import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from '../App.jsx';
 import CurrentNutrition from './CurrentNutrition.jsx';
+import GoalNutrition from './GoalNutrition.jsx';
+import RemainingNutrition from './RemainingNutrition.jsx';
 
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {
@@ -36,7 +38,7 @@ const AddFood = (props) => {
 
     const options = {
       method: 'GET',
-      url: `https://nutritionix-api.p.rapidapi.com/v1_1/search/${item_name}?results=0:20&fields=item_name,nf_calories,nf_protein,nf_total_carbohydrate,nf_total_fat, nf_serving_weight_grams`,
+      url: `https://nutritionix-api.p.rapidapi.com/v1_1/search/${item_name}?results=0:20&fields=item_name,nf_calories,nf_protein,nf_total_carbohydrate,nf_total_fat,nf_serving_weight_grams`,
       headers: {
         'X-RapidAPI-Key': '8d78c2c137msh45549c0419a5bcfp1908b7jsn3ad72d367882',
         'X-RapidAPI-Host': 'nutritionix-api.p.rapidapi.com',
@@ -49,6 +51,7 @@ const AddFood = (props) => {
         return response.data.hits[0].fields;
       })
       .then((obj) => {
+        console.log(obj);
         const {
           item_name,
           nf_calories,
@@ -101,7 +104,11 @@ const AddFood = (props) => {
 
   return (
     <div className='editFoodPages'>
-      <CurrentNutrition />
+      <div className='fixed-container'>
+        <GoalNutrition />
+        <CurrentNutrition />
+        <RemainingNutrition />
+      </div>
       <div className='editFoodContainer'>
         <article className='cardEditFood'>
           <h3>What did you eat?</h3>

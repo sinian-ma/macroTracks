@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import CurrentNutrition from './CurrentNutrition.jsx';
+import GoalNutrition from './GoalNutrition.jsx';
+import RemainingNutrition from './RemainingNutrition.jsx';
 
 import FoodCard from './FoodCard.jsx';
 
@@ -39,13 +41,15 @@ const DatabaseSearch = () => {
   return (
     <section className='mainSection'>
       <div className='fixed-container'>
+        <GoalNutrition />
         <CurrentNutrition />
+        <RemainingNutrition />
       </div>
 
       <div className='pageHeader'>
         <span class='body-heading'>
           <div className='aboveFoodCards'>
-            <h2>Food Log:</h2>
+            <h1>Food Log</h1>
             <span>
               <Link to={'/add'}>
                 <button type='button' className='green-btnSecondary'>

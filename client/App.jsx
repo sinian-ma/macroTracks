@@ -13,6 +13,11 @@ const App = () => {
   const [fat, setFat] = useState(0);
   const [carbohydrate, setCarbohydrate] = useState(0);
 
+  const [goalCalories, setGoalCalories] = useState(2727);
+  const [goalProtein, setGoalProtein] = useState(166);
+  const [goalFat, setGoalFat] = useState(77);
+  const [goalCarbohydrate, setGoalCarbohydrate] = useState(364);
+
   useEffect(() => {
     fetch('/api')
       .then((res) => res.json())
@@ -49,6 +54,14 @@ const App = () => {
         setFat,
         carbohydrate,
         setCarbohydrate,
+        goalCalories,
+        setGoalCalories,
+        goalProtein,
+        setGoalProtein,
+        goalFat,
+        setGoalFat,
+        goalCarbohydrate,
+        setGoalCarbohydrate,
       }}
     >
       <div className='router'>

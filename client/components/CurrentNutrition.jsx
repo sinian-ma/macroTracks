@@ -7,15 +7,16 @@ const CurrentNutrition = () => {
 
   return (
     <div className='nutrition-current'>
-      <h3 className='typ-imp-text'>Current Total</h3>
+      <h2 className='typ-imp-text'>Current Total</h2>
       <div className='macroCount'>
-        <div className='typ-text'>Calories: {user.calories}</div>
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <div className='typ-text'>Protein: {user.protein} </div>
+        <h4 className='typ-text'>Calories: {user.calories}</h4>
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <div className='typ-text'>Fat: {user.fat} </div>
+        <h4 className='typ-text'>Protein: {user.protein} </h4>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <h4 className='typ-text'>Fat: {user.fat} </h4>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <div className='typ-text'>Carbohydrates: {user.carbohydrate} </div>
+        <h4 className='typ-text'>Carbohydrates: {user.carbohydrate} </h4>
         &nbsp;&nbsp;&nbsp;&nbsp;
       </div>
     </div>

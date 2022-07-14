@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { UserContext } from '../App.jsx';
 import CurrentNutrition from './CurrentNutrition.jsx';
+import GoalNutrition from './GoalNutrition.jsx';
+import RemainingNutrition from './RemainingNutrition.jsx';
 
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {
@@ -50,10 +52,10 @@ const DeleteFood = () => {
           let newFat = user.fat - data.nf_total_fat;
           let newCarbohydrate = user.carbohydrate - data.nf_total_carbohydrate;
 
-          user.setCalories(Math.floor(newCalories));
-          user.setProtein(Math.floor(newProtein));
-          user.setFat(Math.floor(newFat));
-          user.setCarbohydrate(Math.floor(newCarbohydrate));
+          user.setCalories(Math.ceil(newCalories));
+          user.setProtein(Math.ceil(newProtein));
+          user.setFat(Math.ceil(newFat));
+          user.setCarbohydrate(Math.ceil(newCarbohydrate));
         }
       })
       .catch((err) => console.log('AddFood fetch: ERROR: ', err));
@@ -63,7 +65,11 @@ const DeleteFood = () => {
 
   return (
     <div className='editFoodPages'>
-      <CurrentNutrition />
+      <div className='fixed-container'>
+        <GoalNutrition />
+        <CurrentNutrition />
+        <RemainingNutrition />
+      </div>
       <section className='editFoodContainer'>
         <article className='cardEditFood'>
           <h3>What do you want to delete?</h3>
