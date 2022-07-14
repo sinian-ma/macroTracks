@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from '../App.jsx';
+import CurrentNutrition from './CurrentNutrition.jsx';
 
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {
@@ -70,10 +71,17 @@ const AddFood = (props) => {
           // nf_serving_weight_grams: nf_serving_weight_grams,
         };
 
-        user.calories += body.nf_calories;
-        user.protein += body.nf_protein;
-        user.fat += body.nf_total_fat;
-        user.carbohydrate += body.nf_total_carbohydrate;
+        let newCalories = Math.floor(user.calories + body.nf_calories);
+        let newProtein = Math.floor(user.protein + body.nf_protein);
+        let newFat = Math.floor(user.fat + body.nf_total_fat);
+        let newCarbohydrate = Math.floor(
+          user.carbohydrate + body.nf_total_carbohydrate
+        );
+
+        user.setCalories(newCalories);
+        user.setProtein(newProtein);
+        user.setFat(newFat);
+        user.setCarbohydrate(newCarbohydrate);
 
         fetch('/api', {
           method: 'POST',
@@ -92,31 +100,34 @@ const AddFood = (props) => {
   }
 
   return (
-    <section className='editFoodContainer'>
-      <article className='cardEditFood'>
-        <h3>What did you eat?</h3>
-        <div className='editFoodFields'>
-          <label htmlFor='name'>Food Item: </label>
-          <input
-            className='input'
-            name='Food'
-            placeholder='Enter food'
-            value={item_name}
-            onChange={nameOnChange}
-          />
-        </div>
-        <div className='createCharButtonContainer'>
-          <Link to='/' className='backLink'>
-            <button type='button' className='btnSecondary'>
-              Go Back
+    <div>
+      <CurrentNutrition />
+      <section className='editFoodContainer'>
+        <article className='cardEditFood'>
+          <h3>What did you eat?</h3>
+          <div className='editFoodFields'>
+            <label htmlFor='name'>Food Item: </label>
+            <input
+              className='input'
+              name='Food'
+              placeholder='Enter food'
+              value={item_name}
+              onChange={nameOnChange}
+            />
+          </div>
+          <div className='createCharButtonContainer'>
+            <Link to='/' className='backLink'>
+              <button type='button' className='btnSecondary'>
+                Go Back
+              </button>
+            </Link>
+            <button type='button' className='btnMainAdd' onClick={findFood}>
+              Save
             </button>
-          </Link>
-          <button type='button' className='btnMainAdd' onClick={findFood}>
-            Save
-          </button>
-        </div>
-      </article>
-    </section>
+          </div>
+        </article>
+      </section>
+    </div>
   );
 };
 

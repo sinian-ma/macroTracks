@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { UserContext } from '../App.jsx';
+import CurrentNutrition from './CurrentNutrition.jsx';
 
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {
@@ -37,17 +38,22 @@ const DeleteFood = () => {
     })
       .then((resp) => resp.json())
       .then((data) => {
-        // console.log('data: ', data);
+        console.log('data: ', data);
         if ('deletedCount' in data) {
-          user.calories = 0;
-          user.protein = 0;
-          user.fat = 0;
-          user.carbohydrate = 0;
+          user.setCalories(0);
+          user.setProtein(0);
+          user.setFat(0);
+          user.setCarbohydrate(0);
         } else {
-          user.calories -= data.nf_calories;
-          user.protein -= data.nf_protein;
-          user.fat -= data.nf_total_fat;
-          user.carbohydrate -= data.nf_total_carbohydrate;
+          let newCalories = user.calories - data.nf_calories;
+          let newProtein = user.protein - data.nf_protein;
+          let newFat = user.fat - data.nf_total_fat;
+          let newCarbohydrate = user.carbohydrate - data.nf_total_carbohydrate;
+
+          user.setCalories(Math.floor(newCalories));
+          user.setProtein(Math.floor(newProtein));
+          user.setFat(Math.floor(newFat));
+          user.setCarbohydrate(Math.floor(newCarbohydrate));
         }
       })
       .catch((err) => console.log('AddFood fetch: ERROR: ', err));
@@ -56,33 +62,36 @@ const DeleteFood = () => {
   }
 
   return (
-    <section className='editFoodContainer'>
-      <article className='cardEditFood'>
-        <h3>What do you want to delete?</h3>
-        <div className='editFoodFields'>
-          <label htmlFor='name'>Food Item: </label>
-          <input
-            name='Food'
-            placeholder='Enter food'
-            value={item_name}
-            onChange={nameOnChange}
-          />
-        </div>
-        <div className='createFoodButtonContainer'>
-          <Link to='/' className='backLink'>
-            <button type='button' className='btnSecondary'>
-              Go Back
+    <div>
+      <CurrentNutrition />
+      <section className='editFoodContainer'>
+        <article className='cardEditFood'>
+          <h3>What do you want to delete?</h3>
+          <div className='editFoodFields'>
+            <label htmlFor='name'>Food Item: </label>
+            <input
+              name='Food'
+              placeholder='Enter food'
+              value={item_name}
+              onChange={nameOnChange}
+            />
+          </div>
+          <div className='createFoodButtonContainer'>
+            <Link to='/' className='backLink'>
+              <button type='button' className='btnSecondary'>
+                Go Back
+              </button>
+            </Link>
+            <button type='button' className='btnMain' onClick={deleteFd}>
+              Delete
             </button>
-          </Link>
-          <button type='button' className='btnMain' onClick={deleteFd}>
-            Delete
-          </button>
-          <button type='button' className='btnMain' onClick={deleteFd}>
-            Delete All
-          </button>
-        </div>
-      </article>
-    </section>
+            <button type='button' className='btnMain' onClick={deleteFd}>
+              Delete All
+            </button>
+          </div>
+        </article>
+      </section>
+    </div>
   );
 };
 

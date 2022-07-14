@@ -28,10 +28,10 @@ const App = () => {
           sumFat += obj.nf_total_fat;
           sumCarbohydrate += obj.nf_total_carbohydrate;
         });
-        setCalories(sumCalories);
-        setProtein(sumProtein);
-        setFat(sumFat);
-        setCarbohydrate(sumCarbohydrate);
+        setCalories(Math.floor(sumCalories));
+        setProtein(Math.floor(sumProtein));
+        setFat(Math.floor(sumFat));
+        setCarbohydrate(Math.floor(sumCarbohydrate));
       })
       .catch((err) =>
         console.log('DatabaseSearch.componentDidMount: get food: ERROR: ', err)
