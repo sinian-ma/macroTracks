@@ -52,7 +52,6 @@ const AddFood = (props) => {
         return response.data.hits[0].fields;
       })
       .then((obj) => {
-        console.log(obj);
         const {
           item_name,
           nf_calories,
@@ -63,6 +62,7 @@ const AddFood = (props) => {
           nf_serving_size_unit,
           nf_serving_weight_grams,
         } = obj;
+        console.log(obj);
 
         const body = {
           item_name: item_name,
