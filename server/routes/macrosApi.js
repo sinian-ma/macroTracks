@@ -8,7 +8,8 @@ router.get('/', macrosController.getFood, (req, res) =>
   res.status(200).json(res.locals.food)
 );
 
-router.post('/add', macrosController.addFood, (req, res) => {
+router.post('/', macrosController.addFood, (req, res) => {
+  // console.log('final: ', res.locals.food);
   res.status(200).json(res.locals.food);
 });
 

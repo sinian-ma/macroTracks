@@ -19,6 +19,7 @@ macrosController.getFood = (req, res, next) => {
 
 macrosController.addFood = (req, res, next) => {
   // write code here
+
   const {
     item_name,
     nf_calories,
@@ -28,17 +29,19 @@ macrosController.addFood = (req, res, next) => {
     nf_serving_size_qty,
     nf_serving_size_unit,
   } = req.body;
+
   models.Post.create({
-    item_name,
-    nf_calories,
-    nf_total_fat,
-    nf_total_carbohydrate,
-    nf_protein,
-    nf_serving_size_qty,
-    nf_serving_size_unit,
+    item_name: item_name,
+    nf_calories: nf_calories,
+    nf_total_fat: nf_total_fat,
+    nf_total_carbohydrate: nf_total_carbohydrate,
+    nf_protein: nf_protein,
+    nf_serving_size_qty: nf_serving_size_qty,
+    nf_serving_size_unit: nf_serving_size_unit,
   })
     .then((foodDoc) => {
       res.locals.food = foodDoc;
+      // console.log('res locals: ', res.locals.food);
       next();
     })
     .catch((err) => {

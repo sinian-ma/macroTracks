@@ -23,19 +23,11 @@ const useInput = (init) => {
   return [value, onChange];
 };
 
-let newFood;
-
 const AddFood = (props) => {
   const [item_name, nameOnChange] = useInput('');
-  const [nf_calories, caloriesOnChange] = useInput('');
-  const [nf_total_fat, fatOnChange] = useInput('');
-  const [nf_total_carbohydrate, carbOnChange] = useInput('');
-  const [nf_protein, proteinOnChange] = useInput('');
-  const [nf_serving_size_qty, qtyOnChange] = useInput('');
-  const [nf_serving_size_unit, unitOnChange] = useInput('');
 
   //
-  function getPosts() {
+  function findFood() {
     const options = {
       method: 'GET',
       url: `https://nutritionix-api.p.rapidapi.com/v1_1/search/${item_name}?results=0:20&fields=item_name,nf_calories,nf_protein,nf_total_carbohydrate,nf_total_fat, nf_serving_weight_grams`,
@@ -57,8 +49,41 @@ const AddFood = (props) => {
           nf_serving_size_qty,
           nf_serving_size_unit,
         } = response.data.hits[0].fields;
-        let result = response.data.hits[0].fields;
-        console.log(result);
+        return response.data.hits[0].fields;
+      })
+      .then((obj) => {
+        const {
+          item_name,
+          nf_calories,
+          nf_total_fat,
+          nf_total_carbohydrate,
+          nf_protein,
+          nf_serving_size_qty,
+          nf_serving_size_unit,
+        } = obj;
+
+        const body = {
+          item_name: item_name,
+          nf_calories: nf_calories,
+          nf_total_fat: nf_total_fat,
+          nf_total_carbohydrate: nf_total_carbohydrate,
+          nf_protein: nf_protein,
+          nf_serving_size_qty: nf_serving_size_qty,
+          nf_serving_size_unit: nf_serving_size_unit,
+        };
+
+        fetch('/api', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'Application/JSON',
+          },
+          body: JSON.stringify(body),
+        })
+          .then((resp) => resp.json())
+          .then((data) => {
+            console.log('data? : ', data);
+          })
+          .catch((err) => console.log('AddFood fetch: ERROR: ', err));
       })
       .catch(function (error) {
         console.error(error);
@@ -68,7 +93,8 @@ const AddFood = (props) => {
   //
 
   const saveFood = () => {
-    getPosts();
+    findFood();
+
     const body = {
       item_name,
       nf_calories,
@@ -78,7 +104,7 @@ const AddFood = (props) => {
       nf_serving_size_qty,
       nf_serving_size_unit,
     };
-    console.log('body: ', body);
+    // console.log('body: ', body);
     fetch('/api', {
       method: 'POST',
       headers: {
@@ -118,7 +144,7 @@ const AddFood = (props) => {
         <div className='createCharButtonContainer'>
           <Link to='/' className='backLink'>
             <button type='button' className='btnSecondary'>
-              Cancel
+              Go Back
             </button>
           </Link>
           <button type='button' className='btnMain' onClick={saveFood}>

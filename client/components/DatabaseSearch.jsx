@@ -40,7 +40,7 @@ class Foods extends Component {
 
     if (!food) return null;
 
-    if (!food.length) return <div>Sorry, no food found</div>;
+    // if (!food.length) return <div>Sorry, no food found</div>;
 
     const foodElems = food.map((foodObj, i) => {
       return <FoodCard key={i} info={foodObj} />;
@@ -49,13 +49,12 @@ class Foods extends Component {
     return (
       <section className='mainSection'>
         <header className='pageHeader'>
-          <h2>Consumed Foods:</h2>
-
           <Link to={'/add'}>
             <button type='button' className='btnSecondary'>
               Add Food
             </button>
           </Link>
+          <h2>What I Ate:</h2>
         </header>
         <div className='foodContainer'>{foodElems}</div>
       </section>
