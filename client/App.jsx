@@ -1,10 +1,4 @@
-import React, {
-  Component,
-  useState,
-  useEffect,
-  useContext,
-  createContext,
-} from 'react';
+import React, { useState, useEffect } from 'react';
 import DatabaseSearch from './components/DatabaseSearch.jsx';
 import TotalNutrition from './components/TotalNutrition.jsx';
 import { Routes, Route } from 'react-router-dom';
@@ -18,6 +12,31 @@ const App = () => {
   const [protein, setProtein] = useState(0);
   const [fat, setFat] = useState(0);
   const [carbohydrate, setCarbohydrate] = useState(0);
+
+  useEffect(() => {
+    fetch('/api')
+      .then((res) => res.json())
+      .then((food) => {
+        console.log(food);
+        let sumCalories = 0;
+        let sumProtein = 0;
+        let sumFat = 0;
+        let sumCarbohydrate = 0;
+        food.forEach((obj) => {
+          sumCalories += obj.nf_calories;
+          sumProtein += obj.nf_protein;
+          sumFat += obj.nf_total_fat;
+          sumCarbohydrate += obj.nf_total_carbohydrate;
+        });
+        setCalories(sumCalories);
+        setProtein(sumProtein);
+        setFat(sumFat);
+        setCarbohydrate(sumCarbohydrate);
+      })
+      .catch((err) =>
+        console.log('DatabaseSearch.componentDidMount: get food: ERROR: ', err)
+      );
+  }, []);
 
   return (
     <UserContext.Provider
