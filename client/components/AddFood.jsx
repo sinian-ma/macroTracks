@@ -30,6 +30,7 @@ const useInput = (init) => {
 const AddFood = (props) => {
   const user = useContext(UserContext);
   const [item_name, nameOnChange] = useInput('');
+  const [serving_size, sizeOnChange] = useInput('');
 
   //
   function findFood() {
@@ -60,18 +61,26 @@ const AddFood = (props) => {
           nf_protein,
           nf_serving_size_qty,
           nf_serving_size_unit,
-          // nf_serving_weight_grams,
+          nf_serving_weight_grams,
         } = obj;
 
         const body = {
           item_name: item_name,
-          nf_calories: nf_calories,
-          nf_total_fat: nf_total_fat,
-          nf_total_carbohydrate: nf_total_carbohydrate,
-          nf_protein: nf_protein,
+          nf_calories: Math.ceil(
+            (serving_size / nf_serving_weight_grams) * nf_calories
+          ),
+          nf_total_fat: Math.ceil(
+            (serving_size / nf_serving_weight_grams) * nf_total_fat
+          ),
+          nf_total_carbohydrate: Math.ceil(
+            (serving_size / nf_serving_weight_grams) * nf_total_carbohydrate
+          ),
+          nf_protein: Math.ceil(
+            (serving_size / nf_serving_weight_grams) * nf_protein
+          ),
           nf_serving_size_qty: nf_serving_size_qty,
           nf_serving_size_unit: nf_serving_size_unit,
-          // nf_serving_weight_grams: nf_serving_weight_grams,
+          nf_serving_weight_grams: serving_size,
         };
 
         let newCalories = Math.floor(user.calories + body.nf_calories);
@@ -85,6 +94,7 @@ const AddFood = (props) => {
         user.setProtein(newProtein);
         user.setFat(newFat);
         user.setCarbohydrate(newCarbohydrate);
+        user.setServingSizeGram(serving_size);
 
         fetch('/api', {
           method: 'POST',
@@ -120,6 +130,16 @@ const AddFood = (props) => {
               placeholder='Enter food'
               value={item_name}
               onChange={nameOnChange}
+            />
+          </div>
+          <div className='editFoodFields'>
+            <label htmlFor='name'>How many grams? </label>
+            <input
+              className='input'
+              name='Food'
+              placeholder='Enter grams'
+              value={serving_size}
+              onChange={sizeOnChange}
             />
           </div>
           <div className='createCharButtonContainer'>

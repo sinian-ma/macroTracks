@@ -12,6 +12,7 @@ const App = () => {
   const [protein, setProtein] = useState(0);
   const [fat, setFat] = useState(0);
   const [carbohydrate, setCarbohydrate] = useState(0);
+  const [servingSizeGram, setServingSizeGram] = useState(0);
 
   const [goalCalories, setGoalCalories] = useState(2727);
   const [goalProtein, setGoalProtein] = useState(166);
@@ -62,6 +63,8 @@ const App = () => {
         setGoalFat,
         goalCarbohydrate,
         setGoalCarbohydrate,
+        servingSizeGram,
+        setServingSizeGram,
       }}
     >
       <div className='router'>

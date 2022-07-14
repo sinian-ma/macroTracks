@@ -9,7 +9,7 @@ const FoodCard = ({ info }) => {
     nf_protein,
     nf_serving_size_qty,
     nf_serving_size_unit,
-    // nf_serving_weight_grams,
+    nf_serving_weight_grams,
   } = info;
 
   return (
@@ -25,9 +25,9 @@ const FoodCard = ({ info }) => {
         <div className='foodDetail'>Total Protein: {nf_protein}</div>
         <div className='foodDetail'>Serving Size: {nf_serving_size_qty}</div>
         <div className='foodDetail'>Serving Unit: {nf_serving_size_unit}</div>
-        {/* <div className='foodDetail'>
+        <div className='foodDetail'>
           Serving Size in Grams: {nf_serving_weight_grams}
-        </div> */}
+        </div>
       </div>
     </article>
   );

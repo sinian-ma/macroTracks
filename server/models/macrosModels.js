@@ -45,10 +45,10 @@ const postSchema = new mongoose.Schema({
     type: String,
     // required: true,
   },
-  // nf_serving_weight_grams: {
-  //   type: String,
-  //   // required: true,
-  // },
+  nf_serving_weight_grams: {
+    type: Number,
+    // required: true,
+  },
 });
 
 const Post = mongoose.model('Post', postSchema);

@@ -46,7 +46,7 @@ macrosController.addFood = (req, res, next) => {
     nf_protein,
     nf_serving_size_qty,
     nf_serving_size_unit,
-    // nf_serving_weight_grams,
+    nf_serving_weight_grams,
   } = req.body;
 
   models.Post.create({
@@ -57,7 +57,7 @@ macrosController.addFood = (req, res, next) => {
     nf_protein: nf_protein,
     nf_serving_size_qty: nf_serving_size_qty,
     nf_serving_size_unit: nf_serving_size_unit,
-    // nf_serving_weight_grams: nf_serving_weight_grams,
+    nf_serving_weight_grams: nf_serving_weight_grams,
   })
     .then((foodDoc) => {
       res.locals.food = foodDoc;
