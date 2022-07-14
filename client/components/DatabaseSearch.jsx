@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import CurrentNutrition from './CurrentNutrition.jsx';
 
 import FoodCard from './FoodCard.jsx';
 
@@ -48,21 +49,23 @@ class Foods extends Component {
 
     return (
       <section className='mainSection'>
+        <CurrentNutrition />
         <header className='pageHeader'>
-          <span>
-            <Link to={'/add'}>
-              <button type='button' className='btnSecondary'>
-                Add Food
-              </button>
-            </Link>
-            <Link to={'/delete'}>
-              <button type='button' className='btnSecondary'>
-                Delete Food
-              </button>
-            </Link>
+          <span class='body-heading'>
+            <h2>Food Log:</h2>
+            <span>
+              <Link to={'/add'}>
+                <button type='button' className='green-btnSecondary'>
+                  Add Food
+                </button>
+              </Link>
+              <Link to={'/delete'}>
+                <button type='button' className='red-btnSecondary'>
+                  Delete Food
+                </button>
+              </Link>
+            </span>
           </span>
-
-          <h2>What I Ate:</h2>
         </header>
         <div className='foodContainer'>{foodElems}</div>
       </section>

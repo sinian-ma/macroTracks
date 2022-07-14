@@ -28,6 +28,9 @@ const AddFood = (props) => {
 
   //
   function findFood() {
+    let val = document.getElementsByClassName('input');
+    console.log(val.value);
+
     const options = {
       method: 'GET',
       url: `https://nutritionix-api.p.rapidapi.com/v1_1/search/${item_name}?results=0:20&fields=item_name,nf_calories,nf_protein,nf_total_carbohydrate,nf_total_fat, nf_serving_weight_grams`,
@@ -73,9 +76,7 @@ const AddFood = (props) => {
           body: JSON.stringify(body),
         })
           .then((resp) => resp.json())
-          .then((data) => {
-            console.log('data? : ', data);
-          })
+
           .catch((err) => console.log('AddFood fetch: ERROR: ', err));
       })
       .catch(function (error) {
@@ -84,16 +85,13 @@ const AddFood = (props) => {
   }
 
   return (
-    <section className='mainSection createFoodContainer'>
-      <header className='pageHeader'>
-        <h2>Add Food</h2>
-      </header>
-
-      <article className='card createFood'>
+    <section className='editFoodContainer'>
+      <article className='cardEditFood'>
         <h3>What did you eat?</h3>
-        <div className='createFoodFields'>
+        <div className='editFoodFields'>
           <label htmlFor='name'>Food Item: </label>
           <input
+            className='input'
             name='Food'
             placeholder='Enter food'
             value={item_name}
@@ -106,7 +104,7 @@ const AddFood = (props) => {
               Go Back
             </button>
           </Link>
-          <button type='button' className='btnMain' onClick={findFood}>
+          <button type='button' className='btnMainAdd' onClick={findFood}>
             Save
           </button>
         </div>

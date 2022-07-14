@@ -43,14 +43,10 @@ const DeleteFood = () => {
   }
 
   return (
-    <section className='mainSection createFoodContainer'>
-      <header className='pageHeader'>
-        <h2>Delete One Entry</h2>
-      </header>
-
-      <article className='card createFood'>
+    <section className='editFoodContainer'>
+      <article className='cardEditFood'>
         <h3>What do you want to delete?</h3>
-        <div className='createFoodFields'>
+        <div className='editFoodFields'>
           <label htmlFor='name'>Food Item: </label>
           <input
             name='Food'
@@ -59,14 +55,14 @@ const DeleteFood = () => {
             onChange={nameOnChange}
           />
         </div>
-        <div className='createCharButtonContainer'>
+        <div className='createFoodButtonContainer'>
           <Link to='/' className='backLink'>
             <button type='button' className='btnSecondary'>
               Go Back
             </button>
           </Link>
           <button type='button' className='btnMain' onClick={deleteFd}>
-            Save
+            Delete
           </button>
           <button type='button' className='btnMain' onClick={deleteFd}>
             Delete All

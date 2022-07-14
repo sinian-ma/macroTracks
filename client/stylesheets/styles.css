@@ -1,3 +1,137 @@
 * {
-  background-color: aqua;
+  margin: 0px;
+  padding: 0;
+  font-family: 'Belgrano', serif;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  height: 10%;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: rgb(60, 130, 154);
+  padding: 0px 20px;
+}
+
+main {
+  /* background-color: yellow; */
+  height: 100%;
+}
+
+.left-head-container {
+  display: flex;
+}
+
+.logo-png {
+  max-width: 50px;
+  max-height: 50px;
+}
+
+.right-head-container {
+  display: flex;
+}
+
+.right-head-text {
+  padding: 0px 10px;
+  text-decoration: none;
+  color: white;
+}
+
+.right-head-text:hover {
+  color: pink;
+}
+
+.logo {
+  font-size: 30px;
+  color: white;
+  font-family: 'Allerta Stencil', sans-serif;
+}
+
+.body-heading {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 20px;
+  /* border-bottom: 2px green solid; */
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+button {
+  margin-right: 20px;
+  height: 30px;
+  width: 100px;
+  border-radius: 10px;
+  border: black;
+}
+
+button:hover {
+  background-color: rgba(81, 197, 197, 0.596);
+  color: black;
+  cursor: pointer;
+}
+
+button:active {
+  background: yellow;
+}
+
+.green-btnSecondary {
+  background-color: rgb(168, 215, 168);
+}
+
+.red-btnSecondary {
+  background-color: rgb(220, 167, 167);
+}
+
+.foodContainer {
+  padding: 0px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+}
+
+.foodCard {
+  padding: 20px;
+  width: 20%;
+  border: 2px green solid;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.user-info-container,
+.nutrition-total {
+  padding: 0px 20px;
+}
+
+.typ-head {
+  margin-bottom: 10px;
+}
+
+.typ-text,
+.typ-imp-text {
+  margin: 5px 0px;
+}
+
+.cardEditFood {
+  padding: 0px 20px;
+}
+
+.editFoodFields {
+  margin: 20px 0px;
+}
+
+.nutrition-current {
+  display: flex;
+  flex-direction: column;
+  height: 10%;
+  align-items: center;
+  justify-content: center;
+  /* border-bottom: 2px black solid; */
+}
+
+.macroCount {
+  display: flex;
+}
+.typ-text {
+  margin-right: 0px 10px;
 }
