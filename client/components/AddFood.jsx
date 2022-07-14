@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { UserContext } from '../App.jsx';
+import CurrentNutrition from './CurrentNutrition.jsx';
 
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {
@@ -24,12 +26,13 @@ const useInput = (init) => {
 };
 
 const AddFood = (props) => {
+  const user = useContext(UserContext);
   const [item_name, nameOnChange] = useInput('');
 
   //
   function findFood() {
-    let val = document.getElementsByClassName('input');
-    console.log(val.value);
+    // let val = document.getElementsByClassName('input');
+    // console.log(val.value);
 
     const options = {
       method: 'GET',
@@ -67,6 +70,11 @@ const AddFood = (props) => {
           nf_serving_size_unit: nf_serving_size_unit,
           // nf_serving_weight_grams: nf_serving_weight_grams,
         };
+
+        user.calories += body.nf_calories;
+        user.protein += body.nf_protein;
+        user.fat += body.nf_total_fat;
+        user.carbohydrate += body.nf_total_carbohydrate;
 
         fetch('/api', {
           method: 'POST',

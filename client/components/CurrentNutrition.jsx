@@ -1,22 +1,21 @@
-import React, { Component, useState } from 'react';
+import React, { useContext } from 'react';
 
-const CurrentNutrition = (props) => {
-  const [calories, setCalories] = useState(0);
-  const [protein, setProtein] = useState(0);
-  const [fat, setFat] = useState(0);
-  const [carbohydrate, setCarbohydrate] = useState(0);
+import { UserContext } from '../App.jsx';
+
+const CurrentNutrition = () => {
+  const user = useContext(UserContext);
 
   return (
     <div className='nutrition-current'>
       <h3 className='typ-imp-text'>Current Total</h3>
       <div className='macroCount'>
-        <div className='typ-text'>Calories: {calories}</div>
+        <div className='typ-text'>Calories: {user.calories}</div>
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <div className='typ-text'>Protein: {protein} </div>
+        <div className='typ-text'>Protein: {user.protein} </div>
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <div className='typ-text'>Fat: {fat} </div>
+        <div className='typ-text'>Fat: {user.fat} </div>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <div className='typ-text'>Carbohydrates: {carbohydrate} </div>
+        <div className='typ-text'>Carbohydrates: {user.carbohydrate} </div>
         &nbsp;&nbsp;&nbsp;&nbsp;
       </div>
     </div>

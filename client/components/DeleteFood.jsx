@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
 
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {
