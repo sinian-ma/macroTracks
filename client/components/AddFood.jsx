@@ -58,8 +58,7 @@ const AddFood = (props) => {
           nf_total_fat,
           nf_total_carbohydrate,
           nf_protein,
-          nf_serving_size_qty,
-          nf_serving_size_unit,
+
           nf_serving_weight_grams,
         } = obj;
         console.log(obj);
@@ -78,8 +77,7 @@ const AddFood = (props) => {
           nf_protein: Math.ceil(
             (serving_size / nf_serving_weight_grams) * nf_protein
           ),
-          nf_serving_size_qty: nf_serving_size_qty,
-          nf_serving_size_unit: nf_serving_size_unit,
+
           nf_serving_weight_grams: serving_size,
         };
 

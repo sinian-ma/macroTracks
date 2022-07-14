@@ -44,8 +44,6 @@ macrosController.addFood = (req, res, next) => {
     nf_total_fat,
     nf_total_carbohydrate,
     nf_protein,
-    nf_serving_size_qty,
-    nf_serving_size_unit,
     nf_serving_weight_grams,
   } = req.body;
 
@@ -55,8 +53,6 @@ macrosController.addFood = (req, res, next) => {
     nf_total_fat: nf_total_fat,
     nf_total_carbohydrate: nf_total_carbohydrate,
     nf_protein: nf_protein,
-    nf_serving_size_qty: nf_serving_size_qty,
-    nf_serving_size_unit: nf_serving_size_unit,
     nf_serving_weight_grams: nf_serving_weight_grams,
   })
     .then((foodDoc) => {
