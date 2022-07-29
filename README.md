@@ -1,10 +1,10 @@
 # Food Log | Macro Counter
 
 Solo project incorporating the following tech stack:
-React
-Express
-Node.js
-MongoDB
+React,
+Express,
+Node.js,
+MongoDB,
 Webpack
 
 User can enter a food item into their food log. This will be saved in a database and the macronutrients data is fetched from Nutritionix API.
