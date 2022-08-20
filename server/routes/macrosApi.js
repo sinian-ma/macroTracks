@@ -9,12 +9,10 @@ router.get('/', macrosController.getFood, (req, res) =>
 );
 
 router.post('/', macrosController.addFood, (req, res) => {
-  // console.log('final: ', res.locals.food);
   res.status(200).json(res.locals.food);
 });
 
 router.delete('/', macrosController.deleteFood, (req, res) => {
-  // console.log('final: ', res.locals.food);
   res.status(200).json(res.locals.food);
 });
 
