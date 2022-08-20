@@ -3,7 +3,6 @@ const models = require('../models/macrosModels');
 const macrosController = {};
 
 macrosController.getFood = (req, res, next) => {
-  // write code here
   models.Post.find()
     .then((data) => {
       res.locals.food = data;
@@ -37,7 +36,6 @@ macrosController.deleteFood = (req, res, next) => {
 };
 
 macrosController.addFood = (req, res, next) => {
-  // write code here
   const {
     item_name,
     nf_calories,
@@ -57,7 +55,6 @@ macrosController.addFood = (req, res, next) => {
   })
     .then((foodDoc) => {
       res.locals.food = foodDoc;
-      // console.log('res locals: ', res.locals.food);
       next();
     })
     .catch((err) => {

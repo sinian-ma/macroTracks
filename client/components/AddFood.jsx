@@ -15,7 +15,6 @@ function withRouter(Component) {
   }
   return ComponentWithRouterProp;
 }
-
 // Custom hook for handling input boxes
 // saves us from creating onChange handlers for them individually
 const useInput = (init) => {

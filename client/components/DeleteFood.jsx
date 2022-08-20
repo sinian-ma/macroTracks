@@ -59,8 +59,6 @@ const DeleteFood = () => {
         }
       })
       .catch((err) => console.log('AddFood fetch: ERROR: ', err));
-
-    // alert('Entry Deleted!');
   }
 
   return (

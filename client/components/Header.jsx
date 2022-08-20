@@ -5,8 +5,7 @@ const Header = () => {
   return (
     <div className='header-container'>
       <div className='left-head-container'>
-        <div className='logo'>MyOtherFitnessPal</div>
-        {/* <img src={require('../assets/strong-logo.png')} className='logo-png' /> */}
+        <div className='logo'>MacroTracks</div>
       </div>
       <div className='right-head-container'>
         <Link className='right-head-text' to={'/'}>

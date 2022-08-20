@@ -14,7 +14,6 @@ const DatabaseSearch = () => {
     fetch('/api')
       .then((res) => res.json())
       .then((food) => {
-        // console.log(1);
         if (!Array.isArray(food)) food = [];
         setFetchedFood(true);
         setFood(food);
