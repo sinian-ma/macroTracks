@@ -1,6 +1,4 @@
-// import fetch from 'node-fetch';
 const mongoose = require('mongoose');
-// const axios = require('axios');
 
 const MONGO_URI =
   'mongodb+srv://ian_nyc:mangoPLS1@food-cluster.knqqe.mongodb.net/?retryWrites=true&w=majority';

@@ -31,7 +31,6 @@ const AddFood = (props) => {
   const [item_name, nameOnChange] = useInput('');
   const [serving_size, sizeOnChange] = useInput('');
 
-  //
   function findFood() {
     // let val = document.getElementsByClassName('input');
     // console.log(val.value);
