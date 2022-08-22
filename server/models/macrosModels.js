@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
-const MONGO_URI =
-  'mongodb+srv://ian_nyc:mangoPLS1@food-cluster.knqqe.mongodb.net/?retryWrites=true&w=majority';
+const MONGO_URI = process.env.MONGO_KEY;
 
 mongoose
   .connect(MONGO_URI, {
