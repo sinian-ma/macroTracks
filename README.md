@@ -29,9 +29,9 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<img src="./public/homepage-ss.png"></img>
 
-User can enter a food item into their food log. This will be saved in a database and the macronutrients data is fetched from Nutritionix API. User can enter a macro goal and app will display how much macros they are missing before reaching their goal. Macro count is automatically updated when a new food entry is added
+MacroTracks allows users to calculate their daily macronutrients target based on their user profile and fitness goals. Users can input consumed foods to see total number of macronutrients consumed so far in a day.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -51,12 +51,7 @@ User can enter a food item into their food log. This will be saved in a database
 
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
 ### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
 
 - npm
   ```sh
@@ -65,12 +60,10 @@ This is an example of how to list things you need to use the software and how to
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
 1. Get a free API Key at [https://example.com](https://example.com)
 2. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/ian-ma-nyc/macroTracks.git
    ```
 3. Install NPM packages
    ```sh
@@ -83,25 +76,16 @@ _Below is an example of how you can instruct your audience on installing and set
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- USAGE EXAMPLES -->
-
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- ROADMAP -->
 
 ## Roadmap
 
-- [x] Stretch Feature Placeholder
-- [x] Stretch Feature Placeholder
-- [ ] Stretch Feature Placeholder
-- [ ] Stretch Feature Placeholder
-- [ ] Stretch Feature Placeholder
+- [x] Adding and saving food inputs in database
+- [x] Display data for total macronutrient count
+- [ ] Graphs for macronutrient data
+- [ ] Autocomplete dropdown for database query
+- [ ] Signup/login for user profile
+- [ ] Macronutrient calculator based on user profile and fitness goals
 
 <!-- See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues). -->
 
@@ -128,7 +112,7 @@ Don't forget to give the project a star! Thanks again!
 
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See `LICENSE.md` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
