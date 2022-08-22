@@ -26,7 +26,6 @@ const useInput = (init) => {
   return [value, onChange];
 };
 
-console.log('test: ', process.env.REACT_APP_MONGO_URI);
 const AddFood = (props) => {
   const user = useContext(UserContext);
   const [item_name, nameOnChange] = useInput('');
