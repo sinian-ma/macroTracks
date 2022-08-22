@@ -26,20 +26,18 @@ const useInput = (init) => {
   return [value, onChange];
 };
 
+console.log('test: ', process.env.REACT_APP_MONGO_URI);
 const AddFood = (props) => {
   const user = useContext(UserContext);
   const [item_name, nameOnChange] = useInput('');
   const [serving_size, sizeOnChange] = useInput('');
 
   function findFood() {
-    // let val = document.getElementsByClassName('input');
-    // console.log(val.value);
-
     const options = {
       method: 'GET',
       url: `https://nutritionix-api.p.rapidapi.com/v1_1/search/${item_name}?results=0:20&fields=item_name,nf_calories,nf_protein,nf_total_carbohydrate,nf_total_fat,nf_serving_weight_grams`,
       headers: {
-        'X-RapidAPI-Key': '8d78c2c137msh45549c0419a5bcfp1908b7jsn3ad72d367882',
+        'X-RapidAPI-Key': process.env.NUTRITIONIX_API_KEY,
         'X-RapidAPI-Host': 'nutritionix-api.p.rapidapi.com',
       },
     };
@@ -59,7 +57,6 @@ const AddFood = (props) => {
 
           nf_serving_weight_grams,
         } = obj;
-        console.log(obj);
 
         const body = {
           item_name: item_name,
