@@ -23,7 +23,6 @@ const App = () => {
     fetch('/api')
       .then((res) => res.json())
       .then((food) => {
-        console.log(food);
         let sumCalories = 0;
         let sumProtein = 0;
         let sumFat = 0;
