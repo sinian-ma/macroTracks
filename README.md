@@ -42,6 +42,7 @@ MacroTracks allows users to calculate their daily macronutrients target based on
  <li> <a href="https://expressjs.com/">Express</a></li>
  <li> <a href="https://nodejs.org/en/">Node.js</a></li>
  <li> <a href="https://www.mongodb.com/">MongoDB</a></li>
+ <li> <a href="https://jestjs.io/">Jest</a></li>
 
 </ul>
 
