@@ -46,7 +46,7 @@ const DatabaseSearch = () => {
       </div>
 
       <div className='pageHeader'>
-        <span class='body-heading'>
+        <span className='body-heading'>
           <div className='aboveFoodCards'>
             <h1>Food Log</h1>
             <span>
