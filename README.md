@@ -124,7 +124,7 @@ Distributed under the MIT License. See `LICENSE.md` for more information.
 
 ## Contact
 
-Sinian Ma - [LinkedIn](https://www.linkedin.com/in/sinian-ma/) - sinma1995@gmail.com
+Sinian Ma - [LinkedIn](https://www.linkedin.com/in/sinian-ma/) - nycsinian@gmail.com
 
 MacroTracks: [https://github.com/ian-ma-nyc/macroTracks](https://github.com/ian-ma-nyc/macroTracks)
 
