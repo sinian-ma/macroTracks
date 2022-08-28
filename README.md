@@ -74,7 +74,7 @@ MacroTracks allows users to calculate their daily macronutrients target based on
 5. Create `.env` in the root directory and enter your API key and Database URI
 
    ```js
-   const NUTRITIONIX_API_KEY = 'ENTER YOUR API';
+   const NUTRITIONIX_API_KEY = 'ENTER YOUR API KEY';
    const MONGO_KEY = 'ENTER YOUR MONGODB URI';
    ```
 
