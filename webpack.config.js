@@ -4,7 +4,7 @@ require('dotenv').config({ path: './.env' });
 const webpack = require('webpack');
 
 module.exports = {
-  mode: process.env.NODE_ENV,
+  mode: process.env.NODE_ENV || 'development',
   entry: ['./client/index.js'],
   output: {
     path: path.join(__dirname, '/build'),
@@ -34,9 +34,6 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './index.html',
-    }),
-    new webpack.DefinePlugin({
-      'process.env': JSON.stringify(process.env),
     }),
   ],
   devServer: {
