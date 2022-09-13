@@ -1,6 +1,6 @@
 import React from 'react';
 
-const UserInfo = (props) => {
+const UserInfo = () => {
   return (
     <div className='user-info-container'>
       <h1 className='typ-head'>User Info</h1>

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-const TotalNutrition = (props) => {
+const TotalNutrition = () => {
   return (
     <div className='nutrition-total'>
       <h1 className='typ-head'>Target Macros</h1>
