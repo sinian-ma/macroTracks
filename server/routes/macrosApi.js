@@ -8,6 +8,10 @@ router.get('/', macrosController.getFood, (req, res) =>
   res.status(200).json(res.locals.food)
 );
 
+router.post('/search', macrosController.searchFood, (req, res) => {
+  res.status(200).json(res.locals.food);
+});
+
 router.post('/', macrosController.addFood, (req, res) => {
   res.status(200).json(res.locals.food);
 });

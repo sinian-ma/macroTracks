@@ -5,6 +5,7 @@ import { UserContext } from '../App.jsx';
 import CurrentNutrition from './CurrentNutrition.jsx';
 import GoalNutrition from './GoalNutrition.jsx';
 import RemainingNutrition from './RemainingNutrition.jsx';
+// require('dotenv').config();
 
 //withRouter in react router was deprecated. recreate using hooks with withRouter function
 //documentation: https://reactrouter.com/en/v6.3.0/faq
@@ -32,24 +33,19 @@ const AddFood = () => {
   const user = useContext(UserContext);
   const [item_name, nameOnChange] = useInput('');
   const [serving_size, sizeOnChange] = useInput('');
-  console.log(1);
 
-  function findFood() {
-    const options = {
-      method: 'GET',
-      url: `https://nutritionix-api.p.rapidapi.com/v1_1/search/${item_name}?results=0:20&fields=item_name,nf_calories,nf_protein,nf_total_carbohydrate,nf_total_fat,nf_serving_weight_grams`,
+  function searchFoodFromAPIAndAddToDb() {
+    fetch('/api/search', {
+      method: 'POST',
       headers: {
-        'X-RapidAPI-Key': process.env.NUTRITIONIX_API_KEY,
-        'X-RapidAPI-Host': 'nutritionix-api.p.rapidapi.com',
+        'Content-Type': 'Application/JSON',
       },
-    };
-
-    axios
-      .request(options)
-      .then(function (response) {
-        return response.data.hits[0].fields;
+      body: JSON.stringify({ item_name }),
+    })
+      .then((resp) => {
+        return resp.json();
       })
-      .then((obj) => {
+      .then((data) => {
         const {
           item_name,
           nf_calories,
@@ -57,7 +53,7 @@ const AddFood = () => {
           nf_total_carbohydrate,
           nf_protein,
           nf_serving_weight_grams,
-        } = obj;
+        } = data;
 
         const body = {
           item_name: item_name,
@@ -101,9 +97,8 @@ const AddFood = () => {
 
           .catch((err) => console.log('AddFood fetch: ERROR: ', err));
       })
-      .catch(function (error) {
-        console.error(error);
-      });
+
+      .catch((err) => console.log('SearchFood fetch: ERROR: ', err));
   }
 
   return (
@@ -142,7 +137,11 @@ const AddFood = () => {
                 Go Back
               </button>
             </Link>
-            <button type='button' className='btnMainAdd' onClick={findFood}>
+            <button
+              type='button'
+              className='btnMainAdd'
+              onClick={searchFoodFromAPIAndAddToDb}
+            >
               Save
             </button>
           </div>
