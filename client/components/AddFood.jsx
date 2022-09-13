@@ -6,6 +6,8 @@ import CurrentNutrition from './CurrentNutrition.jsx';
 import GoalNutrition from './GoalNutrition.jsx';
 import RemainingNutrition from './RemainingNutrition.jsx';
 
+//withRouter in react router was deprecated. recreate using hooks with withRouter function
+//documentation: https://reactrouter.com/en/v6.3.0/faq
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {
     let location = useLocation();
@@ -26,10 +28,11 @@ const useInput = (init) => {
   return [value, onChange];
 };
 
-const AddFood = (props) => {
+const AddFood = () => {
   const user = useContext(UserContext);
   const [item_name, nameOnChange] = useInput('');
   const [serving_size, sizeOnChange] = useInput('');
+  console.log(1);
 
   function findFood() {
     const options = {
@@ -53,7 +56,6 @@ const AddFood = (props) => {
           nf_total_fat,
           nf_total_carbohydrate,
           nf_protein,
-
           nf_serving_weight_grams,
         } = obj;
 
