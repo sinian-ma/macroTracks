@@ -5,7 +5,7 @@ const Login = () => {
   return (
     <div className='header-container'>
       <div className='left-head-container'>
-        <div className='logo'>MacroTrack</div>
+        <div className='logo'>MacroTracks</div>
       </div>
       <div className='right-head-container'>
         <Link className='right-head-text' to={'/'}>
