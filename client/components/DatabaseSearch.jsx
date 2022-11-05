@@ -48,7 +48,7 @@ const DatabaseSearch = () => {
       <div className='pageHeader'>
         <span className='body-heading'>
           <div className='aboveFoodCards'>
-            <h1>Food Logs</h1>
+            <h1>Food Log</h1>
             <span>
               <Link to={'/add'}>
                 <button type='button' className='green-btnSecondary'>
