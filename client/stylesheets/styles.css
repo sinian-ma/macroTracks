@@ -1,3 +1,5 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
 * {
   margin: 0px;
   padding: 0;
@@ -17,6 +19,23 @@
 main {
   /* background-color: yellow; */
   height: 100%;
+}
+
+#main-container {
+  place-items: center center;
+}
+
+#sign-in-form {
+  max-width: 330px;
+}
+
+.form-control:focus {
+  z-index: 5;
+}
+
+.macro-logo {
+  width: 72px;
+  height: 72px;
 }
 
 .left-head-container {
@@ -40,6 +59,10 @@ main {
 
 .right-head-text:hover {
   color: pink;
+}
+
+.d-grid {
+  min-width: 100%;
 }
 
 .logo {

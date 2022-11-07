@@ -6,6 +6,9 @@ import AddFood from './components/AddFood.jsx';
 import DeleteFood from './components/DeleteFood.jsx';
 import Header from './components/Header.jsx';
 import UserInfo from './components/UserInfo.jsx';
+import Login from './components/Login.jsx';
+import ProtectedRoutes from './components/ProtectedRoutes.jsx';
+import Signup from './components/Signup.jsx';
 
 const App = () => {
   const [calories, setCalories] = useState(0);
@@ -70,11 +73,15 @@ const App = () => {
         <main>
           <Header />
           <Routes>
-            <Route exact path='/user-information' element={<UserInfo />} />
-            <Route exact path='/' element={<DatabaseSearch />} />
-            <Route exact path='/add' element={<AddFood />} />
-            <Route exact path='/delete' element={<DeleteFood />} />
-            <Route exact path='/summary' element={<TotalNutrition />} />
+            <Route exact path='/' element={<Login />} />
+            <Route exact path='/signup' element={<Signup />} />
+            <Route element={<ProtectedRoutes />}>
+              <Route exact path='/user-information' element={<UserInfo />} />
+              <Route exact path='/home' element={<DatabaseSearch />} />
+              <Route exact path='/add' element={<AddFood />} />
+              <Route exact path='/delete' element={<DeleteFood />} />
+              <Route exact path='/summary' element={<TotalNutrition />} />
+            </Route>
           </Routes>
         </main>
       </div>
