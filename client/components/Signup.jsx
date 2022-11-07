@@ -26,11 +26,21 @@ const Signup = () => {
           />
         </Form.Group>
 
-        <Form.Group className='mb-4' controlId='sign-in-password'>
+        <Form.Group controlId='sign-in-password'>
           <Form.Control
             type='password'
             size='sm'
             placeholder='Password'
+            autoComplete='current-password'
+            className='position-relative'
+          />
+        </Form.Group>
+
+        <Form.Group className='mb-4' controlId='sign-in-password'>
+          <Form.Control
+            type='password'
+            size='sm'
+            placeholder='Verify Password'
             autoComplete='current-password'
             className='position-relative'
           />
