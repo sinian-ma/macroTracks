@@ -10,6 +10,48 @@ const Signup = () => {
     let path = '/';
     navigate(path);
   };
+
+  let email;
+  let password;
+  let verifiedPassword;
+
+  const validEmail = (inputText) => {
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (inputText.match(mailformat)) {
+      return true;
+    }
+    return false;
+  };
+
+  const registerUser = () => {
+    let errorMessage = '';
+    if (!validEmail(email)) {
+      errorMessage = 'Invalid email.';
+    }
+    if (password !== verifiedPassword) errorMessage = 'Passwords do not match.';
+
+    if (errorMessage) {
+      return alert(errorMessage);
+    }
+
+    fetch('/api/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'Application/JSON',
+      },
+      body: JSON.stringify({ email, password }),
+    })
+      .then((resp) => {
+        return resp.json();
+      })
+      .then((res) => {
+        if (res) {
+          alert('Successfully signed up!');
+          routeChange();
+        }
+      });
+  };
+
   return (
     <Container id='main-container' className='d-grid h-50'>
       <Form id='sign-in-form' className='text-center w-100'>
@@ -23,6 +65,9 @@ const Signup = () => {
             placeholder='Email address'
             autoComplete='username'
             className='position-relative'
+            onChange={(e) => {
+              email = e.target.value;
+            }}
           />
         </Form.Group>
 
@@ -33,20 +78,31 @@ const Signup = () => {
             placeholder='Password'
             autoComplete='current-password'
             className='position-relative'
+            onChange={(e) => {
+              password = e.target.value;
+            }}
           />
         </Form.Group>
 
-        <Form.Group className='mb-4' controlId='sign-in-password'>
+        <Form.Group className='mb-4' controlId='sign-in-password-verify'>
           <Form.Control
             type='password'
             size='sm'
             placeholder='Verify Password'
             autoComplete='current-password'
             className='position-relative'
+            onChange={(e) => {
+              verifiedPassword = e.target.value;
+            }}
           />
         </Form.Group>
 
-        <Button className='d-grid mb-1' variant='primary' size='sm'>
+        <Button
+          className='d-grid mb-1'
+          variant='primary'
+          size='sm'
+          onClick={registerUser}
+        >
           Sign Up
         </Button>
 
