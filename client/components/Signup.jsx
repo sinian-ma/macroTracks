@@ -34,22 +34,27 @@ const Signup = () => {
       return alert(errorMessage);
     }
 
-    fetch('/api/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'Application/JSON',
-      },
-      body: JSON.stringify({ email, password }),
-    })
-      .then((resp) => {
-        return resp.json();
-      })
-      .then((res) => {
-        if (res) {
-          alert('Successfully signed up!');
-          routeChange();
-        }
+    const register = async () => {
+      const response = await fetch('/api/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'Application/JSON',
+        },
+        body: JSON.stringify({ email, password }),
       });
+
+      const data = await response.json();
+
+      if (data) {
+        alert('Successfully signed up!');
+        routeChange();
+      }
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+    };
+
+    register();
   };
 
   return (

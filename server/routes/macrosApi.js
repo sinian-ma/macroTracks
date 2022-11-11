@@ -10,10 +10,11 @@ router.post('/signup', authController.signup, (req, res) => {
 });
 
 router.post('/login', authController.login, (req, res) => {
+  // res.status(200).json(res.locals.success);
   res.status(200).json(res.locals.success);
 });
 
-// router.delete('/clearUserDB', authController.clear, (req, res) => {
+// router.delete('/clearUserDB', authController.clearUserDB, (req, res) => {
 //   res.status(200).json(res.locals.deleted);
 // });
 

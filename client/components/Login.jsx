@@ -44,7 +44,6 @@ const Login = () => {
         if (res) {
           user.setLoggedIn(true);
           loggedInPage();
-          // routeChange();
         }
       });
   };

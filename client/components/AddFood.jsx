@@ -132,7 +132,7 @@ const AddFood = () => {
             />
           </div>
           <div className='createCharButtonContainer'>
-            <Link to='/' className='backLink'>
+            <Link to='/home' className='backLink'>
               <button type='button' className='btnSecondary'>
                 Go Back
               </button>

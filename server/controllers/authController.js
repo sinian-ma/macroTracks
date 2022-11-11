@@ -7,6 +7,7 @@ const SALT_WORK_FACTOR = 10;
 const bcrypt = require('bcryptjs');
 
 authController.signup = (req, res, next) => {
+  console.log('in backend');
   const { email, password } = req.body;
 
   bcrypt.hash(password, SALT_WORK_FACTOR).then((hash) => {
@@ -31,6 +32,7 @@ authController.signup = (req, res, next) => {
 
 authController.login = (req, res, next) => {
   const { email, password } = req.body;
+  res.locals.success = false;
 
   models.User.findOne({ email: email }, (err, data) => {
     // console.log('data: ', data);
@@ -39,29 +41,26 @@ authController.login = (req, res, next) => {
     // }
     // if (err)
     //   return next('Error in authController.login: ' + JSON.stringify(err));
-
     // if (!(req.body.password === data[0].password)) {
     //   return res.redirect('/signup');
     // }
-    res.locals.success = false;
+    console.log('data: ', data);
     if (data !== undefined) {
       bcrypt.compare(password, data.password, (err, result) => {
-        if (err) {
-          return next(err);
-        }
-        if (result) {
-          console.log('here true');
+        if (result === true) {
           res.locals.success = true;
           return next();
         }
+        if (err) {
+          return next(err);
+        }
       });
     }
-    console.log(res.locals.success);
-    return next();
   });
 };
 
 // authController.clearUserDB = (req, res, next) => {
+//   // http://localhost:3000/api/clearUserDB
 //   console.log('here');
 //   models.User.deleteMany()
 //     .then(() => {
