@@ -8,7 +8,7 @@ const Header = () => {
         <div className='logo'>MacroTracks</div>
       </div>
       <div className='right-head-container'>
-        <Link className='right-head-text' to={'/'}>
+        <Link className='right-head-text' to={'/home'}>
           <div className='right-head-text'>Home</div>
         </Link>
         <Link className='right-head-text' to={'/user-information'}>

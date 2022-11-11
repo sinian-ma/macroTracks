@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Navigate, Outlet } from 'react-router';
+import { UserContext } from '../App.jsx';
 
 const useAuth = () => {
   const user = { loggedIn: false };
@@ -7,8 +8,9 @@ const useAuth = () => {
 };
 
 const ProtectedRoutes = () => {
-  const isAuth = useAuth();
-  return isAuth ? <Outlet /> : <Navigate to='/' />;
+  const user = useContext(UserContext);
+
+  return user.loggedIn ? <Outlet /> : <Navigate to='/' />;
 };
 
 export default ProtectedRoutes;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import DatabaseSearch from './components/DatabaseSearch.jsx';
+import DatabaseSearch from './components/Homepage.jsx';
 import TotalNutrition from './components/TotalNutrition.jsx';
 import { Routes, Route } from 'react-router-dom';
 import AddFood from './components/AddFood.jsx';
@@ -21,6 +21,8 @@ const App = () => {
   const [goalProtein, setGoalProtein] = useState(166);
   const [goalFat, setGoalFat] = useState(77);
   const [goalCarbohydrate, setGoalCarbohydrate] = useState(364);
+
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     fetch('/api')
@@ -67,6 +69,8 @@ const App = () => {
         setGoalCarbohydrate,
         servingSizeGram,
         setServingSizeGram,
+        loggedIn,
+        setLoggedIn,
       }}
     >
       <div className='router'>

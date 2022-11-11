@@ -1,15 +1,54 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '../App.jsx';
 import Logo from '../public/logo.jpg';
 import { Button, Form, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const navigate = useNavigate();
+  const user = useContext(UserContext);
 
-  const routeChange = () => {
+  const signUpPage = () => {
     let path = '/signup';
     navigate(path);
   };
+
+  const loggedInPage = () => {
+    let path = '/home';
+    navigate(path);
+  };
+
+  let email;
+  let password;
+
+  const signin = () => {
+    if (!email) {
+      return alert('Please enter your email.');
+    }
+
+    if (!password) {
+      return alert('Please enter your password');
+    }
+
+    fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'Application/JSON',
+      },
+      body: JSON.stringify({ email, password }),
+    })
+      .then((resp) => {
+        return resp.json();
+      })
+      .then((res) => {
+        if (res) {
+          user.setLoggedIn(true);
+          loggedInPage();
+          // routeChange();
+        }
+      });
+  };
+
   return (
     <Container id='main-container' className='d-grid h-50'>
       <Form id='sign-in-form' className='text-center w-100'>
@@ -23,6 +62,9 @@ const Login = () => {
             placeholder='Email address'
             autoComplete='username'
             className='position-relative'
+            onChange={(e) => {
+              email = e.target.value;
+            }}
           />
         </Form.Group>
 
@@ -33,6 +75,9 @@ const Login = () => {
             placeholder='Password'
             autoComplete='current-password'
             className='position-relative'
+            onChange={(e) => {
+              password = e.target.value;
+            }}
           />
         </Form.Group>
 
@@ -43,7 +88,12 @@ const Login = () => {
           <Form.Check label='Remember me' />
         </Form.Group>
 
-        <Button className='d-grid mb-1' variant='primary' size='sm'>
+        <Button
+          className='d-grid mb-1'
+          variant='primary'
+          size='sm'
+          onClick={signin}
+        >
           Sign In
         </Button>
 
@@ -51,7 +101,7 @@ const Login = () => {
           className='d-grid'
           variant='Warning'
           size='sm'
-          onClick={routeChange}
+          onClick={signUpPage}
         >
           Sign Up
         </Button>

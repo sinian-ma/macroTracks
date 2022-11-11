@@ -9,6 +9,10 @@ router.post('/signup', authController.signup, (req, res) => {
   res.status(200).json(res.locals.success);
 });
 
+router.post('/login', authController.login, (req, res) => {
+  res.status(200).json(res.locals.success);
+});
+
 // router.delete('/clearUserDB', authController.clear, (req, res) => {
 //   res.status(200).json(res.locals.deleted);
 // });
