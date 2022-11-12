@@ -3,7 +3,7 @@ const app = express();
 const path = require('path');
 const webpack = require('../webpack.config.js');
 
-const apiRouter = require('./routes/macrosApi');
+const apiRouter = require('./routes/api');
 const PORT = 3000;
 
 app.use(express.json());

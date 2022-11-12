@@ -28,7 +28,7 @@ authController.signup = (req, res, next) => {
         email: email,
         password: hashedPassword,
       });
-      const success = await newUser;
+      await newUser;
       res.locals.success = true;
       next();
     } catch (error) {

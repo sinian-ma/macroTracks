@@ -10,7 +10,6 @@ router.post('/signup', authController.signup, (req, res) => {
 });
 
 router.post('/login', authController.login, (req, res) => {
-  // res.status(200).json(res.locals.success);
   res.status(200).json(res.locals.success);
 });
 
