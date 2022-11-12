@@ -6,28 +6,42 @@ const authController = {};
 const SALT_WORK_FACTOR = 10;
 const bcrypt = require('bcryptjs');
 
-authController.signup = (req, res, next) => {
-  console.log('in backend');
-  const { email, password } = req.body;
+const validEmail = (email) => {
+  var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if (email.match(mailformat)) {
+    return true;
+  }
+  return false;
+};
 
-  bcrypt.hash(password, SALT_WORK_FACTOR).then((hash) => {
-    models.User.create({
-      email: email,
-      password: hash,
-    })
-      .then(() => {
-        res.locals.success = true;
-        next();
-      })
-      .catch((err) => {
-        next({
-          log: `authController.signup: Error: ${err}`,
-          message: {
-            err: 'Error occurred in authController.signup. Check server log for more details',
-          },
-        });
+authController.signup = (req, res, next) => {
+  const { email, password, verifiedPassword } = req.body;
+
+  if (!email || !validEmail(email)) next('Please enter a valid email.');
+  if (!password || !verifiedPassword) next('Please enter a password');
+  if (password !== verifiedPassword) next('Passwords do not match.');
+
+  const hashPassword = async () => {
+    const hashedPassword = await bcrypt.hash(password, SALT_WORK_FACTOR);
+    try {
+      const newUser = models.User.create({
+        email: email,
+        password: hashedPassword,
       });
-  });
+      const success = await newUser;
+      res.locals.success = true;
+      next();
+    } catch (error) {
+      next({
+        log: `authController.signup: Error: ${error}`,
+        message: {
+          err: 'This email already exists.',
+        },
+      });
+    }
+  };
+
+  hashPassword();
 };
 
 authController.login = (req, res, next) => {
@@ -59,17 +73,16 @@ authController.login = (req, res, next) => {
   });
 };
 
-// authController.clearUserDB = (req, res, next) => {
-//   // http://localhost:3000/api/clearUserDB
-//   console.log('here');
-//   models.User.deleteMany()
-//     .then(() => {
-//       res.locals.deleted = 'User DB Cleared';
-//       next();
-//     })
-//     .catch((err) => {
-//       console.log('macros controller error: ', err);
-//     });
-// };
+authController.clearUserDB = (req, res, next) => {
+  // http://localhost:3000/api/clearUserDB
+  models.User.deleteMany()
+    .then(() => {
+      res.locals.deleted = 'User DB Cleared';
+      next();
+    })
+    .catch((err) => {
+      console.log('macros controller error: ', err);
+    });
+};
 
 module.exports = authController;

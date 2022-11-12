@@ -15,46 +15,25 @@ const Signup = () => {
   let password;
   let verifiedPassword;
 
-  const validEmail = (inputText) => {
-    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (inputText.match(mailformat)) {
-      return true;
+  const registerUser = async () => {
+    const response = await fetch('/api/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'Application/JSON',
+      },
+      body: JSON.stringify({ email, password, verifiedPassword }),
+    });
+
+    const data = await response.json();
+
+    if (data === true) {
+      alert('Successfully signed up!');
+      routeChange();
     }
-    return false;
-  };
-
-  const registerUser = () => {
-    let errorMessage = '';
-    if (!validEmail(email)) {
-      errorMessage = 'Invalid email.';
+    if (!response.ok) {
+      alert(data.err);
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
-    if (password !== verifiedPassword) errorMessage = 'Passwords do not match.';
-
-    if (errorMessage) {
-      return alert(errorMessage);
-    }
-
-    const register = async () => {
-      const response = await fetch('/api/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'Application/JSON',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await response.json();
-
-      if (data) {
-        alert('Successfully signed up!');
-        routeChange();
-      }
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-    };
-
-    register();
   };
 
   return (
