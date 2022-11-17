@@ -45,19 +45,22 @@ authController.signup = (req, res, next) => {
 
 authController.login = (req, res, next) => {
   const { email, password } = req.body;
+
   res.locals.success = false;
 
-  models.User.findOne({ email: email }, (err, data) => {
-    if (data !== undefined) {
-      bcrypt.compare(password, data.password, (err, result) => {
-        if (result === true) {
-          res.locals.success = true;
-          return next();
-        }
+  models.User.findOne({ email: email }, (error, account) => {
+    if (account) {
+      bcrypt.compare(password, account.password, (err, isSuccess) => {
         if (err) {
           return next(err);
         }
+        if (isSuccess) {
+          res.locals.success = true;
+        }
+        return next();
       });
+    } else {
+      return next(error);
     }
   });
 };
