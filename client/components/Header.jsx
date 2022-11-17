@@ -5,10 +5,12 @@ const Header = () => {
   return (
     <div className='header-container'>
       <div className='left-head-container'>
-        <div className='logo'>MacroTracks</div>
+        <Link className='logo' to={'/home'}>
+          MacroTracks
+        </Link>
       </div>
       <div className='right-head-container'>
-        <Link className='right-head-text' to={'/'}>
+        <Link className='right-head-text' to={'/home'}>
           <div className='right-head-text'>Home</div>
         </Link>
         <Link className='right-head-text' to={'/user-information'}>

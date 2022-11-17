@@ -3,7 +3,7 @@ const app = express();
 const path = require('path');
 const webpack = require('../webpack.config.js');
 
-const apiRouter = require('./routes/macrosApi');
+const apiRouter = require('./routes/api');
 const PORT = 3000;
 
 app.use(express.json());
@@ -32,9 +32,9 @@ app.use((req, res) =>
 
 app.use((err, req, res, next) => {
   const defaultErr = {
-    log: 'Express error handler caught unknown middleware error',
+    log: 'Express error handler caught unknown middleware error: ' + err,
     status: 500,
-    message: { err: 'An error occurred' },
+    message: { err: err },
   };
   const errorObj = Object.assign({}, defaultErr, err);
   console.log(errorObj.log);
