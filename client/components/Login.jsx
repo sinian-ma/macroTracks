@@ -21,7 +21,7 @@ const Login = () => {
   let email;
   let password;
 
-  const signin = () => {
+  const signin = async () => {
     if (!email) {
       return alert('Please enter your email.');
     }
@@ -30,22 +30,20 @@ const Login = () => {
       return alert('Please enter your password');
     }
 
-    fetch('/api/login', {
+    const attemptLogin = await fetch('/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'Application/JSON',
       },
       body: JSON.stringify({ email, password }),
-    })
-      .then((resp) => {
-        return resp.json();
-      })
-      .then((res) => {
-        if (res) {
-          user.setLoggedIn(true);
-          loggedInPage();
-        }
-      });
+    });
+
+    const isSuccessfulLogin = await attemptLogin.json();
+
+    if (isSuccessfulLogin) {
+      user.setLoggedIn(true);
+      loggedInPage();
+    }
   };
 
   return (

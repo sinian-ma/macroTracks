@@ -1,5 +1,4 @@
 const models = require('../models/userModels');
-const axios = require('axios');
 require('dotenv').config();
 
 const authController = {};
@@ -49,16 +48,6 @@ authController.login = (req, res, next) => {
   res.locals.success = false;
 
   models.User.findOne({ email: email }, (err, data) => {
-    // console.log('data: ', data);
-    // if (!data[0]) {
-    //   return res.redirect('/signup');
-    // }
-    // if (err)
-    //   return next('Error in authController.login: ' + JSON.stringify(err));
-    // if (!(req.body.password === data[0].password)) {
-    //   return res.redirect('/signup');
-    // }
-    console.log('data: ', data);
     if (data !== undefined) {
       bcrypt.compare(password, data.password, (err, result) => {
         if (result === true) {

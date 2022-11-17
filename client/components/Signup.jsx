@@ -16,7 +16,7 @@ const Signup = () => {
   let verifiedPassword;
 
   const registerUser = async () => {
-    const response = await fetch('/api/signup', {
+    const attemptSignup = await fetch('/api/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'Application/JSON',
@@ -24,12 +24,13 @@ const Signup = () => {
       body: JSON.stringify({ email, password, verifiedPassword }),
     });
 
-    const data = await response.json();
+    const isSuccessfulSignup = await attemptSignup.json();
 
-    if (data === true) {
+    if (isSuccessfulSignup) {
       alert('Successfully signed up!');
       routeChange();
     }
+
     if (!response.ok) {
       alert(data.err);
       throw new Error(`HTTP error! status: ${response.status}`);
