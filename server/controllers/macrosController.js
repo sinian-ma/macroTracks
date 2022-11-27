@@ -5,7 +5,7 @@ require('dotenv').config();
 const macrosController = {};
 
 macrosController.getFood = (req, res, next) => {
-  models.Post.find()
+  models.Post.find({ user: req.body.user })
     .then((data) => {
       res.locals.food = data;
       next();
@@ -39,6 +39,8 @@ macrosController.deleteFood = (req, res, next) => {
 
 macrosController.addFood = (req, res, next) => {
   const {
+    user,
+    date,
     item_name,
     nf_calories,
     nf_total_fat,
@@ -48,6 +50,8 @@ macrosController.addFood = (req, res, next) => {
   } = req.body;
 
   models.Post.create({
+    user: user,
+    date: date,
     item_name: item_name,
     nf_calories: nf_calories,
     nf_total_fat: nf_total_fat,

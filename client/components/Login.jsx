@@ -42,6 +42,7 @@ const Login = () => {
 
     if (isSuccessfulLogin) {
       user.setLoggedIn(true);
+      user.setUser(username);
       loggedInPage();
     } else {
       alert('Login information is incorrect.');

@@ -26,14 +26,12 @@ const Signup = () => {
 
     const isSuccessfulSignup = await attemptSignup.json();
 
-    if (isSuccessfulSignup) {
+    if (!isSuccessfulSignup.err) {
       alert('Successfully signed up!');
       routeChange();
-    }
-
-    if (!response.ok) {
-      alert(data.err);
-      throw new Error(`HTTP error! status: ${response.status}`);
+    } else {
+      alert(isSuccessfulSignup.err);
+      throw new Error(`Signup error! ${isSuccessfulSignup.err}`);
     }
   };
 

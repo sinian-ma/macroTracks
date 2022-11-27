@@ -8,6 +8,7 @@ const Header = () => {
 
   const logout = () => {
     user.setLoggedIn(false);
+    user.setUser(undefined);
   };
 
   if (user.loggedIn) {

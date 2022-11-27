@@ -23,6 +23,7 @@ const App = () => {
   const [goalCarbohydrate, setGoalCarbohydrate] = useState(364);
 
   const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState(undefined);
 
   useEffect(() => {
     fetch('/api')
@@ -71,6 +72,8 @@ const App = () => {
         setServingSizeGram,
         loggedIn,
         setLoggedIn,
+        user,
+        setUser,
       }}
     >
       <div className='router'>

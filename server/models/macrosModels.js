@@ -15,6 +15,14 @@ mongoose
   .catch((err) => console.log(err));
 
 const postSchema = new mongoose.Schema({
+  user: {
+    type: String,
+    required: true,
+  },
+  date: {
+    type: Date,
+    required: true,
+  },
   item_name: {
     type: String,
     required: true,

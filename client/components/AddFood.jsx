@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
 import { UserContext } from '../App.jsx';
 import CurrentNutrition from './CurrentNutrition.jsx';
 import GoalNutrition from './GoalNutrition.jsx';
@@ -56,6 +55,8 @@ const AddFood = () => {
         } = data;
 
         const body = {
+          user: user.user,
+          date: new Date(),
           item_name: item_name,
           nf_calories: Math.ceil(
             (serving_size / nf_serving_weight_grams) * nf_calories
