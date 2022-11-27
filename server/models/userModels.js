@@ -15,7 +15,7 @@ mongoose
   .catch((err) => console.log(err));
 
 const userSchema = new mongoose.Schema({
-  email: {
+  username: {
     type: String,
     required: true,
     unique: true,
