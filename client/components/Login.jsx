@@ -18,12 +18,12 @@ const Login = () => {
     navigate(path);
   };
 
-  let email;
+  let username;
   let password;
 
   const signin = async () => {
-    if (!email) {
-      return alert('Please enter your email.');
+    if (!username) {
+      return alert('Please enter your username.');
     }
 
     if (!password) {
@@ -35,13 +35,14 @@ const Login = () => {
       headers: {
         'Content-Type': 'Application/JSON',
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ username, password }),
     });
 
     const isSuccessfulLogin = await attemptLogin.json();
 
     if (isSuccessfulLogin) {
       user.setLoggedIn(true);
+      user.setUser(username);
       loggedInPage();
     } else {
       alert('Login information is incorrect.');
@@ -54,15 +55,15 @@ const Login = () => {
         <img className='mb-4 macro-logo' src={Logo} alt='MacroTracks' />
         <h1 className='mb-4 fs-4 fw-normal'>Please sign in.</h1>
 
-        <Form.Group controlId='sign-in-email-address'>
+        <Form.Group controlId='sign-in-username-address'>
           <Form.Control
-            type='email'
+            type='username'
             size='sm'
-            placeholder='Email address'
+            placeholder='Username'
             autoComplete='username'
             className='position-relative'
             onChange={(e) => {
-              email = e.target.value;
+              username = e.target.value;
             }}
           />
         </Form.Group>

@@ -18,7 +18,7 @@ router.delete('/clearUserDB', authController.clearUserDB, (req, res) => {
   res.status(200).json(res.locals.deleted);
 });
 
-router.get('/', macrosController.getFood, (req, res) =>
+router.post('/get', macrosController.getFood, (req, res) =>
   res.status(200).json(res.locals.food)
 );
 

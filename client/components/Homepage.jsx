@@ -1,17 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import CurrentNutrition from './CurrentNutrition.jsx';
 import GoalNutrition from './GoalNutrition.jsx';
 import RemainingNutrition from './RemainingNutrition.jsx';
+import { UserContext } from '../App.jsx';
 
 import FoodCard from './FoodCard.jsx';
 
 const DatabaseSearch = () => {
   const [fetchedFood, setFetchedFood] = useState(false);
   const [food, setFood] = useState([]);
+  const user = useContext(UserContext);
 
   useEffect(() => {
-    fetch('/api')
+    fetch('/api/get', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'Application/JSON',
+      },
+      body: JSON.stringify({ user: user.user }),
+    })
       .then((res) => res.json())
       .then((food) => {
         if (!Array.isArray(food)) food = [];

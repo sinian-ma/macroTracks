@@ -5,18 +5,18 @@ const authController = {};
 const SALT_WORK_FACTOR = 10;
 const bcrypt = require('bcryptjs');
 
-const validEmail = (email) => {
-  var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  if (email.match(mailformat)) {
-    return true;
-  }
-  return false;
-};
+// const validEmail = (username) => {
+//   var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+//   if (username.match(mailformat)) {
+//     return true;
+//   }
+//   return false;
+// };
 
 authController.signup = (req, res, next) => {
-  const { email, password, verifiedPassword } = req.body;
+  const { username, password, verifiedPassword } = req.body;
 
-  if (!email || !validEmail(email)) next('Please enter a valid email.');
+  if (!username) next('Please enter a valid username.');
   if (!password || !verifiedPassword) next('Please enter a password');
   if (password !== verifiedPassword) next('Passwords do not match.');
 
@@ -24,7 +24,7 @@ authController.signup = (req, res, next) => {
     const hashedPassword = await bcrypt.hash(password, SALT_WORK_FACTOR);
     try {
       const newUser = models.User.create({
-        email: email,
+        username: username,
         password: hashedPassword,
       });
       await newUser;
@@ -34,7 +34,7 @@ authController.signup = (req, res, next) => {
       next({
         log: `authController.signup: Error: ${error}`,
         message: {
-          err: 'This email already exists.',
+          err: 'This username already exists.',
         },
       });
     }
@@ -44,11 +44,11 @@ authController.signup = (req, res, next) => {
 };
 
 authController.login = (req, res, next) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
   res.locals.success = false;
 
-  models.User.findOne({ email: email }, (error, account) => {
+  models.User.findOne({ username: username }, (error, account) => {
     if (account) {
       bcrypt.compare(password, account.password, (err, isSuccess) => {
         if (err) {
